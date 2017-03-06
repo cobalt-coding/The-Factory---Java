@@ -4,6 +4,8 @@ Fight enemies off in waves
 After arbitrary amount of rooms, fight a boss for upgrade
 Industrial feel to the game(Music, Art)
 
+STORY(or what little of it there is): Some kid stumbles upon an abandoned factory
+
 STRUCTURES
 
 Doors will spawn on the left and right in any of 5 spots on the wall.  
@@ -18,4 +20,8 @@ Turrets spawn on the underside of a tile 8 tiles from the bottom of the room.
 They do massive damage.(max of 1 a room) Enemies can take control of it.  
 (Not concrete)When this happens, the player can destroy the turret, or get far enough away from it to get the enemy out of it
 If the turret survives the round, the player can demantle it for parts to upgrade weapon.
+
+ENEMIES
+
+Slimes are the most basic enemy in the game.  They really only hop around and cannot use turrets.
 

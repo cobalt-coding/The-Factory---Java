@@ -21,7 +21,7 @@ public class Game implements Runnable{
 	
 	public Game(String title, int width2, int height2){
 		this.width = width2;
-		this. height = height2;
+		this.height = height2;
 		this.title = title;
 	}
 

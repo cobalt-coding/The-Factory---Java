@@ -2,6 +2,7 @@ package Factory;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.Color;
 
 import Display.Display;
 
@@ -15,6 +16,7 @@ public class Game implements Runnable{
 	
 	private BufferStrategy buffer;
 	private Graphics g;
+	Color BlueGreen = new Color(72, 135, 113);
 	
 	
 	public Game(String title, int width2, int height2){
@@ -55,6 +57,9 @@ public class Game implements Runnable{
 		 g = buffer.getDrawGraphics();
 		
 		g.clearRect(0, 0, width, height);
+		
+		g.setColor(BlueGreen);
+		g.fillRect(500, 250, 300, 300);
 		
 		 
 		 buffer.show();

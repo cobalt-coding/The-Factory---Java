@@ -28,8 +28,8 @@ public class Display {
 		frame.setLocationRelativeTo(null);
 		
 		
-		Image icon = new ImageIcon(Display.class.getResource("/textures/Icon.png")).getImage();	
-		frame.setIconImage(icon);
+		//Image icon = new ImageIcon(Display.class.getResource("/textures/Icon.png")).getImage();	
+		//frame.setIconImage(icon);
 				
 		frame.setVisible(true);
 		

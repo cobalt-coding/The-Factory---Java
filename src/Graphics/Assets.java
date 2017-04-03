@@ -13,5 +13,6 @@ public class Assets {
 	static void init(){
 		
 		// exampleImage.Imageloader.loadImage("/textures/exampleImage.png");
+		
 	}
 }

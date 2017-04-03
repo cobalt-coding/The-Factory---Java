@@ -1,16 +1,10 @@
-//This is but a test
-package Factory;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
+package Factory;
 
 public class Launcher {
 	
 	public static void main(String [] args){	
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = screenSize.getWidth();
-		double height = screenSize.getHeight();
-		Game game = new Game("The Factory", (int)width, (int)height);
+		Game game = new Game("The Factory", 1280, 720);
 		game.start();	}
 }
 	

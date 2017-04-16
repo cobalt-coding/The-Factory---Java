@@ -1,10 +1,14 @@
 package Factory;
 
-import java.awt.Graphics;
+import java.awt.event.*;
 import java.awt.image.BufferStrategy;
-import java.awt.Color;
 
 import Display.Display;
+import Display.KeyManager;
+import Entity.Player;
+import Graphics.Assets;
+
+import java.awt.*;
 
 public class Game implements Runnable{
 	private Display display;
@@ -18,11 +22,16 @@ public class Game implements Runnable{
 	private Graphics g;
 	Color BlueGreen = new Color(72, 135, 113);
 	
+	private KeyManager keyManager;
+	private Player player;
+	
 	
 	public Game(String title, int width2, int height2){
 		this.width = width2;
 		this.height = height2;
 		this.title = title;
+		keyManager = new KeyManager();
+		player = new Player(this, 100, 100);
 	}
 
 	public void run() {
@@ -57,9 +66,12 @@ public class Game implements Runnable{
 		 g = buffer.getDrawGraphics();
 		
 		g.clearRect(0, 0, width, height);
+	
+		 g.setColor(BlueGreen);
+		 g.fillRect(0, 0, 1280, 720);
 		
-		g.setColor(BlueGreen);
-		g.fillRect(500, 250, 300, 300);
+		 player.render(g);
+
 		
 		 
 		 buffer.show();
@@ -67,11 +79,19 @@ public class Game implements Runnable{
 	}
 
 	private void update() {
-		
+		keyManager.tick();
+		player.tick();
 	}
-
+	
+	public KeyManager getKeyManager(){
+		return keyManager;
+	}
+	
+	
 	private void init(){
 		display = new Display(title, width, height);
+		display.getFrame().addKeyListener(keyManager);
+		Assets.init();
 		//Assets.init();
 		
 	}

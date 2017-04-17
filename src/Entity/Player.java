@@ -18,17 +18,25 @@ public class Player extends Entity {
 	public void tick() {
 		if(game.getKeyManager().up){
 			//Jump physics will have to be put here
-			y-=3;
+			if(y>0){
+				y-=3;
+			}
 		}	
 		if(game.getKeyManager().down){
 			//only will be used with ladders...maybe a crouch
-			y+=3;
+			if(y<685){
+				y+=3;
+			}
 		}	
 		if(game.getKeyManager().left){
-			x-=3;
+			if(x>0){
+				x-=3;
+			}
 		}	
 		if(game.getKeyManager().right){
-			x+=3;
+			if(x<1233){
+				x+=3;
+			}
 		}
 	}
 

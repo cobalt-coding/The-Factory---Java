@@ -21,7 +21,7 @@ public class Player extends Entity {
 		if(game.getKeyManager().up){
 			//Jump physics will have to be put here
 			if(y>0){
-				vely-=2.1;
+				vely-=1.4;
 			} else {
 				vely = 0;
 				y = 0;
@@ -30,7 +30,7 @@ public class Player extends Entity {
 		if(game.getKeyManager().down){
 			//only will be used with ladders...maybe a crouch
 			if(y<685){
-				vely+=2.1;
+				vely+=1.4;
 			} else {
 				vely = 0;
 				y = 685;
@@ -38,7 +38,7 @@ public class Player extends Entity {
 		}	
 		if(game.getKeyManager().left){
 			if(x>0){
-				velx-=2.1;
+				velx-=1.4;
 			} else {
 				velx = 0;
 				x = 0;
@@ -46,7 +46,7 @@ public class Player extends Entity {
 		}	
 		if(game.getKeyManager().right){
 			if(x<1233){
-				velx+=2.1;
+				velx+=1.4;
 			} else {
 				velx = 0;
 				x = 1233;

@@ -8,6 +8,7 @@ import Graphics.Assets;
 public class Player extends Entity {
 
 	private Game game;
+	private boolean collide = true;
 	
 	private float velx = 0, vely = 0;
 	
@@ -17,8 +18,8 @@ public class Player extends Entity {
 	}
 
 	@Override
-	public void tick() {
-		if(game.getKeyManager().up){
+	public void tick() {			
+		/*if(game.getKeyManager().up){
 			//Jump physics will have to be put here
 			if(y>0){
 				vely-=1.4;
@@ -35,7 +36,14 @@ public class Player extends Entity {
 				vely = 0;
 				y = 685;
 			}
-		}	
+		}	*/
+		vely+=1;
+		if(collide){
+			vely=0;
+			if(game.getKeyManager().up && vely==0){
+				vely-=35;
+			}
+		}
 		if(game.getKeyManager().left){
 			if(x>0){
 				velx-=1.4;
@@ -61,6 +69,15 @@ public class Player extends Entity {
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.icon, (int) x, (int) y, null);
+	}
+	public void collisionCheck(Block block){ 
+		int surface = block.getX() + block.getWidth();
+		int side = block.getY() + block.getHeight();
+		int playY = (int) (this.y + 40);
+		if(this.x >= block.getX() && this.x < surface && playY >= block.getY() && playY < side ){
+			collide = true;
+		}else
+			collide = false;
 	}
 	
 }

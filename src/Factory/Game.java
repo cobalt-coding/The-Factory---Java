@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 
 import Display.Display;
 import Display.KeyManager;
+import Entity.Block;
 import Entity.Player;
 import Graphics.Assets;
 
@@ -24,6 +25,7 @@ public class Game implements Runnable{
 	
 	private KeyManager keyManager;
 	private Player player;
+	private Block block;
 	
 	
 	public Game(String title, int width2, int height2){
@@ -71,7 +73,7 @@ public class Game implements Runnable{
 		 g.fillRect(0, 0, 1280, 720);
 		
 		 player.render(g);
-
+		 block.render(g);
 		
 		 
 		 buffer.show();
@@ -81,6 +83,7 @@ public class Game implements Runnable{
 	private void update() {
 		keyManager.tick();
 		player.tick();
+		player.collisionCheck(block);
 	}
 	
 	public KeyManager getKeyManager(){
@@ -92,8 +95,7 @@ public class Game implements Runnable{
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
-		//Assets.init();
-		
+		block = new Block(0, 690, 1281, 30);
 	}
 	
 	public synchronized void start(){

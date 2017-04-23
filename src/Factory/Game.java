@@ -95,7 +95,7 @@ public class Game implements Runnable{
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
-		block = new Block(0, 690, 1281, 30);
+		block = new Block(0, 690, 1281, 30, "normal");
 	}
 	
 	public synchronized void start(){

@@ -37,11 +37,10 @@ public class Player extends Entity {
 				y = 685;
 			}
 		}	*/
-		vely+=1;
 		if(collide){
 			vely=0;
 			if(game.getKeyManager().up && vely==0){
-				vely-=35;
+				vely-=8;
 			}
 		}
 		if(game.getKeyManager().left){
@@ -62,8 +61,9 @@ public class Player extends Entity {
 		}
 		x+=this.velx;
 		y+=this.vely;
+		
 		this.velx/=1.2;
-		this.vely/=1.2;
+		vely+=0.3;
 	}
 
 	@Override

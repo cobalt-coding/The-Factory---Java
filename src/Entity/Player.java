@@ -4,13 +4,17 @@ import java.awt.Graphics;
 
 import Factory.Game;
 import Graphics.Assets;
+import Misc.Functions;
 
 public class Player extends Entity {
 
 	private Game game;
 	private boolean collide = true;
+	private Functions functions = new Functions();
 	
 	private float velx = 0, vely = 0;
+	private int width = 40;
+	private int height = 40;
 	
 	public Player(Game game, float x, float y) {
 		super(x, y);
@@ -19,25 +23,7 @@ public class Player extends Entity {
 
 	@Override
 	public void tick() {			
-		/*if(game.getKeyManager().up){
-			//Jump physics will have to be put here
-			if(y>0){
-				vely-=1.4;
-			} else {
-				vely = 0;
-				y = 0;
-			}
-		}	
-		if(game.getKeyManager().down){
-			//only will be used with ladders...maybe a crouch
-			if(y<685){
-				vely+=1.4;
-			} else {
-				vely = 0;
-				y = 685;
-			}
-		}	*/
-		if(collide){
+			if(collide){
 			vely=0;
 			if(game.getKeyManager().up && vely==0){
 				vely-=8;
@@ -71,13 +57,8 @@ public class Player extends Entity {
 		g.drawImage(Assets.icon, (int) x, (int) y, null);
 	}
 	public void collisionCheck(Block block){ 
-		int surface = block.getX() + block.getWidth();
-		int side = block.getY() + block.getHeight();
-		int playY = (int) (this.y + 40);
-		if(this.x >= block.getX() && this.x < surface && playY >= block.getY() && playY < side ){
-			collide = true;
-		}else
-			collide = false;
+	collide = functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height);
+			
 	}
 	
 }

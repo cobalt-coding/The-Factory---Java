@@ -35,6 +35,12 @@ public class Game implements Runnable{
 		keyManager = new KeyManager();
 		player = new Player(this, 100, 100);
 	}
+	private void init(){
+		display = new Display(title, width, height);
+		display.getFrame().addKeyListener(keyManager);
+		Assets.init();
+		block = new Block(0, 690, 1281, 30, "normal");
+	}
 
 	public void run() {
 		init();
@@ -88,14 +94,6 @@ public class Game implements Runnable{
 	
 	public KeyManager getKeyManager(){
 		return keyManager;
-	}
-	
-	
-	private void init(){
-		display = new Display(title, width, height);
-		display.getFrame().addKeyListener(keyManager);
-		Assets.init();
-		block = new Block(0, 690, 1281, 30, "normal");
 	}
 	
 	public synchronized void start(){

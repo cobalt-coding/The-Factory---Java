@@ -2,6 +2,7 @@ package Factory;
 
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 import Display.Display;
 import Display.KeyManager;
@@ -27,6 +28,28 @@ public class Game implements Runnable{
 	private Player player;
 	private Block block;
 	
+	private int level = 0;
+	
+	private ArrayList<ArrayList<Block>> blocks = new ArrayList<ArrayList<Block>>();
+	
+	private String[][] levels = {
+		{
+			"....................",
+			".                  .",
+			".                  .",
+			".                  .",
+			".                  .",
+			".                  .",
+			".                  .",
+			".                  .",
+			".                  .",
+			".                  .",
+			".                  .",
+			".         .        .",
+			".      .           .",
+			"...................."
+		}
+	};
 	
 	public Game(String title, int width2, int height2){
 		this.width = width2;
@@ -40,6 +63,20 @@ public class Game implements Runnable{
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		block = new Block(0, 690, 1281, 30, "normal");
+		
+		for (int i = 0 ; i < levels.length ; i++) {
+			blocks.add(new ArrayList<Block>());
+			for (int t = 0 ; t < levels[i].length ; t++) {
+				for (int j = 0 ; j < levels[i][t].length() ; j++) {
+					String blockType = Character.toString(levels[i][t].charAt(j));
+					switch(blockType) {
+						case ".":
+							blocks.get(i).add(new Block(j*30, t*30, 30, 30, "normal"));
+					}
+				}
+			}
+		}
+		
 	}
 
 	public void run() {
@@ -80,7 +117,10 @@ public class Game implements Runnable{
 		
 		 player.render(g);
 		 block.render(g);
-		
+		 
+		 for (int i = 0 ; i < blocks.get(level).size() ; i++) {
+			 blocks.get(level).get(i).render(g);
+		 }
 		 
 		 buffer.show();
 		 g.dispose();

@@ -56,9 +56,15 @@ public class Player extends Entity {
 	public void render(Graphics g) {
 		g.drawImage(Assets.icon, (int) x, (int) y, null);
 	}
+	//Planning to remove this in favor of collisionCheck2 later
 	public void collisionCheck(Block block){ 
-	collide = functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height);
+		collide = functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height);
 			
+	}
+	
+	//Experimental, but hopefully improved collision
+	public void collisionCheck2(float velX, float velY) {
+		
 	}
 	
 }

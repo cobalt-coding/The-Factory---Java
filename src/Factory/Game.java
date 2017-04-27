@@ -28,7 +28,7 @@ public class Game implements Runnable{
 	private Player player;
 	private Block block;
 	
-	private int level = 0;
+	public int level = 0;
 	
 	private ArrayList<ArrayList<Block>> blocks = new ArrayList<ArrayList<Block>>();
 	
@@ -65,13 +65,13 @@ public class Game implements Runnable{
 		block = new Block(0, 690, 1281, 30, "normal");
 		
 		for (int i = 0 ; i < levels.length ; i++) {
-			blocks.add(new ArrayList<Block>());
+			getBlocks().add(new ArrayList<Block>());
 			for (int t = 0 ; t < levels[i].length ; t++) {
 				for (int j = 0 ; j < levels[i][t].length() ; j++) {
 					String blockType = Character.toString(levels[i][t].charAt(j));
 					switch(blockType) {
 						case ".":
-							blocks.get(i).add(new Block(j*30, t*30, 30, 30, "normal"));
+							getBlocks().get(i).add(new Block(j*30, t*30, 30, 30, "normal"));
 					}
 				}
 			}

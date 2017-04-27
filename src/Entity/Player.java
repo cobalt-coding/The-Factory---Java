@@ -16,6 +16,8 @@ public class Player extends Entity {
 	private int width = 40;
 	private int height = 40;
 	
+	private boolean falling = false;
+	
 	public Player(Game game, float x, float y) {
 		super(x, y);
 		this.game = game;
@@ -64,7 +66,15 @@ public class Player extends Entity {
 	
 	//Experimental, but hopefully improved collision
 	public void collisionCheck2(float velX, float velY) {
-		
+		for (int i = 0 ; i < game.blocks.get(game.level).size() ; i++) {
+			 Block block = game.blocks.get(game.level).get(i);
+			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height)) {
+				 if (velX > 0) {
+					 this.velx = 0;
+					 x = block.getX()-width;
+				 }
+			 }
+		}
 	}
 	
 }

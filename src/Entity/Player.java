@@ -9,12 +9,11 @@ import Misc.Functions;
 public class Player extends Entity {
 
 	private Game game;
-	private boolean collide = true;
 	private Functions functions = new Functions();
 	
 	private float velx = 0, vely = 0;
 	private int width = 40;
-	private int height = 40;
+	private int height = 30;
 	
 	private boolean falling = false;
 	
@@ -50,9 +49,9 @@ public class Player extends Entity {
 		}
 		
 		x+=this.velx;
-		this.collisionCheck2(velx, 0);
+		this.collisionCheck(velx, 0);
 		y+=this.vely;
-		this.collisionCheck2(0, vely);
+		this.collisionCheck(0, vely);
 		
 		this.velx/=1.2;
 		vely+=0.3;
@@ -60,16 +59,11 @@ public class Player extends Entity {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.icon, (int) x, (int) y, null);
-	}
-	//Planning to remove this in favor of collisionCheck2 later
-	public void collisionCheck(Block block){ 
-		collide = functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height);
-			
+		g.drawImage(Assets.icon, (int) x-5, (int) y-5, null);
 	}
 	
 	//Experimental, but hopefully improved collision
-	public void collisionCheck2(float velX, float velY) {
+	public void collisionCheck(float velX, float velY) {
 		for (int i = 0 ; i < game.blocks.get(game.level).size() ; i++) {
 			 Block block = game.blocks.get(game.level).get(i);
 			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height)) {

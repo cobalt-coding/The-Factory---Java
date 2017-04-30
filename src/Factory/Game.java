@@ -129,7 +129,6 @@ public class Game implements Runnable{
 	private void update() {
 		keyManager.tick();
 		player.tick();
-		player.collisionCheck(block);
 	}
 	
 	public KeyManager getKeyManager(){

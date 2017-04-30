@@ -30,7 +30,7 @@ public class Game implements Runnable{
 	
 	public int level = 0;
 	
-	private ArrayList<ArrayList<Block>> blocks = new ArrayList<ArrayList<Block>>();
+	public ArrayList<ArrayList<Block>> blocks = new ArrayList<ArrayList<Block>>();
 	
 	private String[][] levels = {
 		{

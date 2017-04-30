@@ -24,31 +24,35 @@ public class Player extends Entity {
 	}
 
 	@Override
-	public void tick() {			
-			if(collide){
-			vely=0;
-			if(game.getKeyManager().up && vely==0){
-				vely-=8;
-			}
+	public void tick() {	
+		
+		if(game.getKeyManager().up && !falling){
+			vely-=8;
 		}
-		if(game.getKeyManager().left){
-			if(x>0){
+		this.falling = true;
+		
+		if (game.getKeyManager().left) {
+			if (x>0) {
 				velx-=1.4;
 			} else {
 				velx = 0;
 				x = 0;
 			}
 		}	
-		if(game.getKeyManager().right){
-			if(x<1233){
+		
+		if (game.getKeyManager().right) {
+			if (x<1233) {
 				velx+=1.4;
 			} else {
 				velx = 0;
 				x = 1233;
 			}
 		}
+		
 		x+=this.velx;
+		this.collisionCheck2(velx, 0);
 		y+=this.vely;
+		this.collisionCheck2(0, vely);
 		
 		this.velx/=1.2;
 		vely+=0.3;
@@ -72,6 +76,20 @@ public class Player extends Entity {
 				 if (velX > 0) {
 					 this.velx = 0;
 					 x = block.getX()-width;
+				 }
+				 if (velX < 0) {
+					 this.velx = 0;
+					 x = block.getX()+block.getWidth();
+				 }
+				 if (velY > 0) {
+					 this.vely = 0;
+					 y = block.getY()-height;
+					 falling = false;
+				 }
+				 if (velY < 0) {
+					 this.vely = 0;
+					 y = block.getY()+block.getHeight();
+					 falling = true;
 				 }
 			 }
 		}

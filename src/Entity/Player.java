@@ -66,7 +66,7 @@ public class Player extends Entity {
 	public void collisionCheck(float velX, float velY) {
 		for (int i = 0 ; i < game.blocks.get(game.level).size() ; i++) {
 			 Block block = game.blocks.get(game.level).get(i);
-			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height)) {
+			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height) && block.type == "normal") {
 				 if (velX > 0) {
 					 this.velx = 0;
 					 x = block.getX()-width;
@@ -79,6 +79,28 @@ public class Player extends Entity {
 					 this.vely = 0;
 					 y = block.getY()-height;
 					 falling = false;
+				 }
+				 if (velY < 0) {
+					 this.vely = 0;
+					 y = block.getY()+block.getHeight();
+					 falling = true;
+				 }
+			 }
+			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height) && block.type == "spike") {
+				 if (velX > 0) {
+					 this.velx = 0;
+					 x = block.getX()-width;
+				 }
+				 if (velX < 0) {
+					 this.velx = 0;
+					 x = block.getX()+block.getWidth();
+				 }
+				 if (velY > 0) {
+					 this.vely = 0;
+					 y = block.getY()-height;
+					 falling = false;
+					 //INSERT DEATH CODE HERE PROBABLY
+					 System.out.println("REEEEEEEEEEE" + Math.random());
 				 }
 				 if (velY < 0) {
 					 this.vely = 0;

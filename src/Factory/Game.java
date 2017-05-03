@@ -46,7 +46,7 @@ public class Game implements Runnable{
 			".                  .",
 			".                  .",
 			".         .        .",
-			".      .           .",
+			".      .        ^^ .",
 			"...................."
 		}
 	};
@@ -72,6 +72,9 @@ public class Game implements Runnable{
 					switch(blockType) {
 						case ".":
 							blocks.get(i).add(new Block(j*30, t*30, 30, 30, "normal"));
+							break;
+						case "^":
+							blocks.get(i).add(new Block(j*30, t*30, 30, 30, "spike"));
 					}
 				}
 			}

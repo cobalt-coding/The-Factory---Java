@@ -3,11 +3,16 @@ package Entity;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import Graphics.Assets;
+
+
+
 public class Block extends Entity{
 	
 	private int width ,height;
 	Color BlockColor = new Color(34, 35, 35);
-	private String type;
+	public String type;
+	private Assets images = new Assets();
 
 	public Block(float x, float y, int width, int height, String type) {
 		super(x, y);
@@ -27,6 +32,9 @@ public class Block extends Entity{
 			case "normal":
 				g.setColor(BlockColor);
 				g.fillRect((int)x, (int)y, width, height);
+				break;
+			case "spike":
+				g.drawImage(Assets.spike, (int)x, (int)y, width, height, null);
 		}
 	}
 	

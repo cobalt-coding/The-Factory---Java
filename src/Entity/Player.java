@@ -4,12 +4,14 @@ import java.awt.Graphics;
 
 import Factory.Game;
 import Graphics.Assets;
+import Menu.Menu;
 import Misc.Functions;
 
 public class Player extends Entity {
 
 	private Game game;
 	private Functions functions = new Functions();
+	private Menu menu;
 	
 	private float velx = 0, vely = 0;
 	private int width = 40;
@@ -20,11 +22,14 @@ public class Player extends Entity {
 	public Player(Game game, float x, float y) {
 		super(x, y);
 		this.game = game;
+		menu = new Menu(game);
 	}
 
 	@Override
 	public void tick() {	
-		
+		menu.tick();
+		if(menu.active)
+			return;
 		if(game.getKeyManager().up && !falling){
 			vely-=8;
 		}
@@ -60,6 +65,7 @@ public class Player extends Entity {
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.icon, (int) x-5, (int) y-5, null);
+		menu.render(g);
 	}
 	
 	//Experimental, but hopefully improved collision

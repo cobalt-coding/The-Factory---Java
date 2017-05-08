@@ -9,6 +9,7 @@ import Display.KeyManager;
 import Entity.Block;
 import Entity.Player;
 import Graphics.Assets;
+import Menu.Menu;
 
 import java.awt.*;
 
@@ -57,13 +58,12 @@ public class Game implements Runnable{
 		this.title = title;
 		keyManager = new KeyManager();
 		player = new Player(this, 100, 100);
+
 	}
 	private void init(){
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
-		block = new Block(0, 690, 1281, 30, "normal");
-		
 		for (int i = 0 ; i < levels.length ; i++) {
 			blocks.add(new ArrayList<Block>());
 			for (int t = 0 ; t < levels[i].length ; t++) {
@@ -119,7 +119,6 @@ public class Game implements Runnable{
 		 g.fillRect(0, 0, 1280, 720);
 		
 		 player.render(g);
-		 block.render(g);
 		 
 		 for (int i = 0 ; i < blocks.get(level).size() ; i++) {
 			 blocks.get(level).get(i).render(g);

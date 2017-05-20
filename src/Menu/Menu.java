@@ -19,7 +19,6 @@ public class Menu {
 		active = !active;
 		if(!active)
 			return;
-		System.out.println("Pause works");
 	}
 	
 	public void render(Graphics g){

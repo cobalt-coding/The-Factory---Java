@@ -8,6 +8,7 @@ import Display.Display;
 import Display.KeyManager;
 import Entity.Block;
 import Entity.Player;
+import Entity.Slime;
 import Graphics.Assets;
 import Menu.Menu;
 
@@ -27,7 +28,8 @@ public class Game implements Runnable{
 	
 	private KeyManager keyManager;
 	private Player player;
-	private Block block;
+	private Menu menu;
+	private Slime slime;
 	
 	public int level = 0;
 	
@@ -57,7 +59,10 @@ public class Game implements Runnable{
 		this.height = height2;
 		this.title = title;
 		keyManager = new KeyManager();
-		player = new Player(this, 100, 100);
+		menu = new Menu(this);
+		player = new Player(this, menu, 100, 100);
+		slime = new Slime(this, menu, 150, 100);
+
 
 	}
 	private void init(){
@@ -117,7 +122,8 @@ public class Game implements Runnable{
 	
 		 g.setColor(BlueGreen);
 		 g.fillRect(0, 0, 1280, 720);
-		
+		 
+		 slime.render(g);
 		 player.render(g);
 		 
 		 for (int i = 0 ; i < blocks.get(level).size() ; i++) {
@@ -131,6 +137,7 @@ public class Game implements Runnable{
 	private void update() {
 		keyManager.tick();
 		player.tick();
+		slime.tick();
 	}
 	
 	public KeyManager getKeyManager(){

@@ -29,7 +29,6 @@ public class Player extends Entity {
 
 	@Override
 	public void tick() {	
-		menu.tick();
 		if(menu.active)
 			return;
 		if(game.getKeyManager().up && !falling){
@@ -68,7 +67,6 @@ public class Player extends Entity {
 	public void render(Graphics g) {
 		g.setColor(blue);
 		g.fillRect((int) x, (int) y, 34, 30);
-		menu.render(g);
 	}
 	
 	//Experimental, but hopefully improved collision

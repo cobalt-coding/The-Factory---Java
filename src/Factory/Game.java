@@ -136,6 +136,7 @@ public class Game implements Runnable{
 
 	private void update() {
 		keyManager.tick();
+		menu.tick();
 		player.tick();
 		slime.tick();
 	}

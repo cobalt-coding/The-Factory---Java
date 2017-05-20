@@ -28,7 +28,6 @@ public class Slime extends Entity{
 
 	@Override
 	public void tick() {
-		menu.tick();
 		if(menu.active)
 			return;
 		velx += .4 * direction;

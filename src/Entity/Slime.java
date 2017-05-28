@@ -9,15 +9,17 @@ import Misc.Functions;
 
 public class Slime extends Entity{
 
-	public float health = 10;
-	private Menu menu;
-	private int direction = 1;
+	private Functions functions = new Functions();
 	private Game game;
+	private Menu menu;
+	
+	private float health = 10;
+	private int direction = 1;
 	private float velx = 0;
 	private float vely = 0;
 	private int width = 40;
 	private int height = 30;
-	private Functions functions = new Functions();
+
 	private boolean falling = true;
 	
 	public Slime(Game game,Menu menu,float x, float y) {
@@ -29,6 +31,8 @@ public class Slime extends Entity{
 	@Override
 	public void tick() {
 		if(menu.active)
+			return;
+		if(health <= 0)
 			return;
 		velx += .4 * direction;
 		x+=this.velx;
@@ -42,6 +46,8 @@ public class Slime extends Entity{
 
 	@Override
 	public void render(Graphics g) {
+		if(health <= 0)
+			return;
 		g.drawImage(Assets.icon, (int) x-5, (int) y-5, null);
 	}
 	
@@ -78,6 +84,19 @@ public class Slime extends Entity{
 					 x = block.getX()+block.getWidth();
 				 }
 			 }
+			 //weapon collision here at some point
 		}
+	}
+	public int getX(){
+		return (int)x;
+	}
+	public int getY(){
+		return (int)y;
+	}
+	public int getWidth(){
+		return (int)width;
+	}
+	public int getHeight(){
+		return (int)height;
 	}
 }

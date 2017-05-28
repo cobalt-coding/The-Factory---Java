@@ -29,7 +29,7 @@ public class Game implements Runnable{
 	private KeyManager keyManager;
 	private Player player;
 	private Menu menu;
-	private Slime slime;
+	public Slime slime;
 	
 	public int level = 0;
 	
@@ -48,8 +48,8 @@ public class Game implements Runnable{
 			".                  .",
 			".                  .",
 			".                  .",
-			".         .        .",
-			".      .        ^^ .",
+			".                  .",
+			".      .       .^^ .",
 			"...................."
 		}
 	};
@@ -60,8 +60,8 @@ public class Game implements Runnable{
 		this.title = title;
 		keyManager = new KeyManager();
 		menu = new Menu(this);
-		player = new Player(this, menu, 100, 100);
 		slime = new Slime(this, menu, 150, 100);
+	    player = new Player(this, menu, 100, 100, slime);
 
 
 	}

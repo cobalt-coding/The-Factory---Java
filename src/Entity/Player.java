@@ -13,6 +13,7 @@ public class Player extends Entity {
 	private Game game;
 	private Functions functions = new Functions();
 	private Menu menu;
+	private Slime slime;
 	
 	private float velx = 0, vely = 0;
 	private int width = 34;
@@ -21,10 +22,11 @@ public class Player extends Entity {
 	
 	private boolean falling = false;
 	
-	public Player(Game game,Menu menu, float x, float y) {
+	public Player(Game game,Menu menu, float x, float y, Slime slime) {
 		super(x, y);
 		this.game = game;
 		this.menu = menu;
+		this.slime = slime;
 	}
 
 	@Override
@@ -68,8 +70,6 @@ public class Player extends Entity {
 		g.setColor(blue);
 		g.fillRect((int) x, (int) y, 34, 30);
 	}
-	
-	//Experimental, but hopefully improved collision
 	public void collisionCheck(float velX, float velY) {
 		for (int i = 0 ; i < game.blocks.get(game.level).size() ; i++) {
 			 Block block = game.blocks.get(game.level).get(i);
@@ -115,7 +115,23 @@ public class Player extends Entity {
 				 }
 			 }
 		}
+		if(functions.collide(slime.getX(), slime.getY(), slime.getWidth(), slime.getHeight(), x, y, width, height)){
+			//insert death code here as well
+			System.out.println("you died...");
+		}
 	}
-	
+	public int getX(){
+		return (int)x;
+	}
+	public int getY(){
+		return (int)y;
+	}
+	public int getWidth(){
+		return (int)width;
+	}
+	public int getHeight(){
+		return (int)height;
+	}
+
 }
 //Hello

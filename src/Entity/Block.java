@@ -10,7 +10,7 @@ import Graphics.Assets;
 public class Block extends Entity{
 	
 	private int width ,height;
-	Color BlockColor = new Color(34, 35, 35);
+	Color BlockColor = new Color(48, 50, 50);
 	public String type;
 	private Assets images = new Assets();
 

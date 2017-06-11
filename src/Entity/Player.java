@@ -102,10 +102,11 @@ public class Player extends Entity {
 				 }
 			 }
 			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height) && block.type == "ladder") {
-				 if(game.getKeyManager().up) {
-					 falling=false;
-					 vely/=1.5;
-				 } 
+				 if (game.getKeyManager().up) {
+					 vely = -4;
+				 } else {
+					 vely = 2;
+				 }
 			 }
 			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height) && block.type == "lCon") {
 				 if (velX > 0) {

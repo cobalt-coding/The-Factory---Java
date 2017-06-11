@@ -35,21 +35,11 @@ public class Player extends Entity {
 		this.falling = true;
 		
 		if (game.getKeyManager().left) {
-			if (x>0) {
-				velx-=1.4;
-			} else {
-				velx = 0;
-				x = 0;
-			}
+			velx-=1.4;
 		}	
 		
 		if (game.getKeyManager().right) {
-			if (x<1233) {
-				velx+=1.4;
-			} else {
-				velx = 0;
-				x = 1233;
-			}
+			velx+=1.4;
 		}
 		
 		x+=this.velx;

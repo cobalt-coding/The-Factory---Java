@@ -36,32 +36,34 @@ public class Game implements Runnable{
 	public ArrayList<ArrayList<Block>> blocks = new ArrayList<ArrayList<Block>>();
 	public ArrayList<ArrayList<Enemy>> enemies = new ArrayList<ArrayList<Enemy>>();
 	
+	private float camX, camY;
+	
 	private String[][] levels = {
 		{
-			"........................................",
-			".                                      .",
-			".                                      .",
-			".                                      .",
-			".                                      .",
-			".                                      .",
-			".                                      .",
-			".                                      .",
-			".                                      .",
-			".                                      .",
-			".                                      .",
-			".  .                                   .",
-			".                                      .",
-			".      .    .   S   .                  .",
-			".^^^^^^.    .........                  .",
-			"........            .                  .",
-			".                   ...........        .",
-			".                                      .",
-			".                                   .. .",
-			".                                      .",
-			".                          .....       .",
-			".                                      .",
-			".                       S              .",
-			"........................................"
+			".............................................",
+			".                                           .",
+			".                                           .",
+			".                                           .",
+			".                                           .",
+			".                                           .",
+			".                                           .",
+			".                                           .",
+			".                                           .",
+			".                                           .",
+			".                                           .",
+			".  .                                        .",
+			".                                           .",
+			".      .    .   S   .                       .",
+			".^^^^^^.    .........                       .",
+			"........            .                       .",
+			".                   ...........             .",
+			".                                           .",
+			".                                   ..      .",
+			".                                           .",
+			".                          .....            .",
+			".                                           .",
+			".                       S                   .",
+			"............................................."
 		}   
 	};
 	
@@ -72,6 +74,8 @@ public class Game implements Runnable{
 		keyManager = new KeyManager();
 		menu = new Menu(this);
 		player = new Player(this, 32, 690);
+		camX = player.getX();
+		camY = player.getY();
 
 	}
 	private void init(){
@@ -137,34 +141,56 @@ public class Game implements Runnable{
 			display.getCanvas().createBufferStrategy(3);
 			return;
 		}
-		 g = buffer.getDrawGraphics();
+		g = buffer.getDrawGraphics();
 		
 		g.clearRect(0, 0, width, height);
 	
-		 g.setColor(BlueGreen);
-		 g.fillRect(0, 0, 1280, 720);
+		g.setColor(BlueGreen);
+		g.fillRect(0, 0, 1280, 720);
+		
+		
+		g.translate((int)-camX+width/2-player.getWidth()/2, (int)-camY+height/2-player.getHeight()/2);
+		
+		player.render(g);
 		 
+		for (int i = 0 ; i < blocks.get(level).size() ; i++) {
+			blocks.get(level).get(i).render(g);
+		}
+		for (int i = 0 ; i < enemies.get(level).size() ; i++) {
+			enemies.get(level).get(i).render(g);
+		}
 		 
-		 player.render(g);
-		 
-		 for (int i = 0 ; i < blocks.get(level).size() ; i++) {
-			 blocks.get(level).get(i).render(g);
-		 }
-		 for (int i = 0 ; i < enemies.get(level).size() ; i++) {
-			 enemies.get(level).get(i).render(g);
-		 }
-		 
-		 buffer.show();
-		 g.dispose();
+		buffer.show();
+		g.dispose();
 	}
 
 	private void update() {
 		keyManager.tick();
 		menu.tick();
 		player.tick();
-		 for (int i = 0 ; i < enemies.get(level).size() ; i++) {
-			 enemies.get(level).get(i).tick();
-		 }
+		
+		camX += (player.getX()-camX)/5;
+		camY += (player.getY()-camY)/5;
+		
+		if (levels[level][0].length()*32 < width) {
+			camX = (levels[level][0].length()*32)/2;
+		} else if (camX < width/2-16) {
+			camX = width/2-16;
+		} else if (camX > levels[level][0].length()*32-width/2-16) {
+			camX = levels[level][0].length()*32-width/2-16;
+		}
+		
+		if (levels[level].length*30 < height/2) {
+			camY = (levels[level].length*30)/2;
+		} else if (camY < height/2-16) {
+			camY = height/2-16;
+		} else if (camY > levels[level].length*30-height/2-16) {
+			camY = levels[level].length*30-height/2-16;
+		}
+		
+		for (int i = 0 ; i < enemies.get(level).size() ; i++) {
+			enemies.get(level).get(i).tick();
+		}
 	}
 	
 	public KeyManager getKeyManager(){

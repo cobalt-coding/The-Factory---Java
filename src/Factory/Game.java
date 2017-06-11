@@ -51,7 +51,7 @@ public class Game implements Runnable{
 			".                                           .",
 			".                                           .",
 			".                                           .",
-			".  .                                        .",
+			".  .                            <<<<<<<<    .",
 			".                                           .",
 			".      .    .   S   .                       .",
 			".^^^^^^.    .........                       .",
@@ -96,6 +96,13 @@ public class Game implements Runnable{
 							break;
 						case "l":
 							blocks.get(i).add(new Block(j*32, t*30, 32, 30, "ladder"));
+							break;
+						case "<":
+							blocks.get(i).add(new Block(j*32, t*30, 32, 30, "lCon"));
+							break;
+						case ">":
+							blocks.get(i).add(new Block(j*32, t*30, 32, 30, "rCon"));
+							break;
 					}
 				}
 			}

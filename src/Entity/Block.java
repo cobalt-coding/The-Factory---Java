@@ -38,6 +38,13 @@ public class Block extends Entity{
 				break;
 			case "ladder":
 				g.drawImage(Assets.ladder, (int)x, (int)y, width, height, null);
+				break;
+			case "lCon":
+				g.drawImage(Assets.lCon, (int)x, (int)y, width, height, null);
+				break;
+			case "rCon":
+				g.drawImage(Assets.rCon, (int)x, (int)y, width, height, null);
+				break;
 		}
 	}
 	

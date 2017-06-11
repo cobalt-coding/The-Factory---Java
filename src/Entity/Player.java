@@ -104,7 +104,51 @@ public class Player extends Entity {
 			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height) && block.type == "ladder") {
 				 if(game.getKeyManager().up) {
 					 falling=false;
-					 vely/=2;
+					 vely/=1.5;
+				 } 
+			 }
+			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height) && block.type == "lCon") {
+				 if (velX > 0) {
+					 this.velx = 0;
+					 x = block.getX()-width;
+				 }
+				 if (velX < 0) {
+					 this.velx = 0;
+					 x = block.getX()+block.getWidth();
+				 }
+				 if (velY > 0) {
+					 this.vely = 0;
+					 y = block.getY()-height;
+					 falling = false;
+					 this.velx -= 1.5;
+				 }
+				 if (velY < 0) {
+					 this.vely = 0;
+					 y = block.getY()+block.getHeight();
+					 falling = true;
+					 this.velx -= 1.5;
+				 }
+			 }
+			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height) && block.type == "rCon") {
+				 if (velX > 0) {
+					 this.velx = 0;
+					 x = block.getX()-width;
+				 }
+				 if (velX < 0) {
+					 this.velx = 0;
+					 x = block.getX()+block.getWidth();
+				 }
+				 if (velY > 0) {
+					 this.vely = 0;
+					 y = block.getY()-height;
+					 falling = false;
+					 this.velx += 1.5;
+				 }
+				 if (velY < 0) {
+					 this.vely = 0;
+					 y = block.getY()+block.getHeight();
+					 falling = true;
+					 this.velx += 1.5;
 				 }
 			 }
 			

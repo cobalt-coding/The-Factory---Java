@@ -44,7 +44,7 @@ public class Game implements Runnable{
 			".                                           .",
 			".                                           .",
 			".                                           .",
-			".                                           .",
+			".      B                                    .",
 			".                                           .",
 			".                                           .",
 			".                                           .",
@@ -115,6 +115,9 @@ public class Game implements Runnable{
 					switch(blockType) {
 						case "S":
 							enemies.get(i).add(new Enemy(j*32, t*30, "slime", this));
+							break;
+						case "B":
+							enemies.get(i).add(new Enemy(j*32, t*30, "bird", this));
 					}
 				}
 			}

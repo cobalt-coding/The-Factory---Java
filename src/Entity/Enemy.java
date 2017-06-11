@@ -10,6 +10,7 @@ public class Enemy extends Entity{
 	
 public String type;
 private Slime slime;
+private Bird bird;
 private Game game;
 
 private int width, height;
@@ -24,6 +25,8 @@ public Enemy(float x, float y, String type, Game game) {
 		width = 40;
 		height = 30;
 		break;
+	case "bird":
+		bird = new Bird(game, x, y);
 	}
 }
 
@@ -35,6 +38,10 @@ public void tick() {
 	 x = slime.x;
 	 y = slime.y;
 		break;
+	case "bird":
+	 bird.tick();
+	 x = bird.x;
+	 y = bird.y;
 	}
 }
 
@@ -44,6 +51,8 @@ public void render(Graphics g) {
 		case "slime":
 			slime.render(g);
 			break;
+		case "bird":
+			bird.render(g);
 	}
 }
 public int getX(){

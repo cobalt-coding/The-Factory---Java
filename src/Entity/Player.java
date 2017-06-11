@@ -158,6 +158,9 @@ public class Player extends Entity {
 			 if (functions.collide(enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getHeight(), x, y, width, height) && enemy.type == "slime") {
 				 System.out.println("You took Damage");
 			 }
+			 if (functions.collide(enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getHeight(), x, y, width, height) && enemy.type == "bird") {
+				 System.out.println("You took Damage");
+			 }
 		 }
 	
 	}

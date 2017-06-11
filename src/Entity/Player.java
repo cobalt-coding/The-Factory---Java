@@ -101,6 +101,12 @@ public class Player extends Entity {
 					 falling = true;
 				 }
 			 }
+			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height) && block.type == "ladder") {
+				 if(game.getKeyManager().up) {
+					 falling=false;
+					 vely/=2;
+				 }
+			 }
 			
 		}
 		 for (int o = 0 ; o < game.enemies.get(game.level).size() ; o++) {

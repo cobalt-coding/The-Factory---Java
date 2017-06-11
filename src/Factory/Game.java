@@ -56,13 +56,13 @@ public class Game implements Runnable{
 			".      .    .   S   .                       .",
 			".^^^^^^.    .........                       .",
 			"........            .                       .",
-			".                   ...........             .",
-			".                                           .",
-			".                                   ..      .",
-			".                                           .",
-			".                          .....            .",
-			".                                           .",
-			".                       S                   .",
+			".                   ...........            l.",
+			".                                          l.",
+			".                                   ..     l.",
+			".                                          l.",
+			".                          .....           l.",
+			".                                          l.",
+			".                       S                  l.",
 			"............................................."
 		}   
 	};
@@ -93,6 +93,9 @@ public class Game implements Runnable{
 							break;
 						case "^":
 							blocks.get(i).add(new Block(j*32, t*30, 32, 30, "spike"));
+							break;
+						case "l":
+							blocks.get(i).add(new Block(j*32, t*30, 32, 30, "ladder"));
 					}
 				}
 			}
@@ -150,8 +153,6 @@ public class Game implements Runnable{
 		
 		
 		g.translate((int)-camX+width/2-player.getWidth()/2, (int)-camY+height/2-player.getHeight()/2);
-		
-		player.render(g);
 		 
 		for (int i = 0 ; i < blocks.get(level).size() ; i++) {
 			blocks.get(level).get(i).render(g);
@@ -159,6 +160,8 @@ public class Game implements Runnable{
 		for (int i = 0 ; i < enemies.get(level).size() ; i++) {
 			enemies.get(level).get(i).render(g);
 		}
+		
+		player.render(g);
 		 
 		buffer.show();
 		g.dispose();

@@ -35,6 +35,9 @@ public class Block extends Entity{
 				break;
 			case "spike":
 				g.drawImage(Assets.spike, (int)x, (int)y, width, height, null);
+				break;
+			case "ladder":
+				g.drawImage(Assets.ladder, (int)x, (int)y, width, height, null);
 		}
 	}
 	

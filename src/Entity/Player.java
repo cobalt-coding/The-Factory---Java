@@ -12,26 +12,22 @@ public class Player extends Entity {
 
 	private Game game;
 	private Functions functions = new Functions();
-	private Menu menu;
-	private Slime slime;
 	
 	private float velx = 0, vely = 0;
-	private int width = 34;
+	private int width = 32;
 	private int height = 30;
 	private Color blue = new Color(0, 0, 255);
 	
 	private boolean falling = false;
 	
-	public Player(Game game,Menu menu, float x, float y, Slime slime) {
+	public Player(Game game, int x, int y) {
 		super(x, y);
 		this.game = game;
-		this.menu = menu;
-		this.slime = slime;
 	}
 
 	@Override
 	public void tick() {	
-		if(menu.active)
+		if(game.menu.active)
 			return;
 		if(game.getKeyManager().up && !falling){
 			vely-=8;
@@ -106,6 +102,7 @@ public class Player extends Entity {
 					 this.vely = 0;
 					 y = block.getY()-height;
 					 falling = false;
+					 System.out.println("Get spiked!");
 					 //INSERT DEATH CODE HERE PROBABLY
 				 }
 				 if (velY < 0) {
@@ -114,11 +111,15 @@ public class Player extends Entity {
 					 falling = true;
 				 }
 			 }
+			
 		}
-		if(functions.collide(slime.getX(), slime.getY(), slime.getWidth(), slime.getHeight(), x, y, width, height)){
-			//insert death code here as well
-			System.out.println("you died...");
-		}
+		 for (int o = 0 ; o < game.enemies.get(game.level).size() ; o++) {
+			 Enemy enemy = game.enemies.get(game.level).get(o);
+			 if (functions.collide(enemy.getX(), enemy.getY(), enemy.getWidth(), enemy.getHeight(), x, y, width, height) && enemy.type == "slime") {
+				 System.out.println("You took Damage");
+			 }
+		 }
+	
 	}
 	public int getX(){
 		return (int)x;

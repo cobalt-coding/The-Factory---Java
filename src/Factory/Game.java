@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import Display.Display;
 import Display.KeyManager;
 import Entity.Block;
+import Entity.Enemy;
 import Entity.Player;
 import Entity.Slime;
 import Graphics.Assets;
@@ -28,30 +29,40 @@ public class Game implements Runnable{
 	
 	private KeyManager keyManager;
 	private Player player;
-	private Menu menu;
-	public Slime slime;
+	public Menu menu;
 	
 	public int level = 0;
 	
 	public ArrayList<ArrayList<Block>> blocks = new ArrayList<ArrayList<Block>>();
+	public ArrayList<ArrayList<Enemy>> enemies = new ArrayList<ArrayList<Enemy>>();
 	
 	private String[][] levels = {
 		{
-			"....................",
-			".                  .",
-			".                  .",
-			".                  .",
-			".                  .",
-			".                  .",
-			".                  .",
-			".                  .",
-			".                  .",
-			".                  .",
-			".                  .",
-			".                  .",
-			".      .       .^^ .",
-			"...................."
-		}
+			"........................................",
+			".                                      .",
+			".                                      .",
+			".                                      .",
+			".                                      .",
+			".                                      .",
+			".                                      .",
+			".                                      .",
+			".                                      .",
+			".                                      .",
+			".                                      .",
+			".  .                                   .",
+			".                                      .",
+			".      .    .   S   .                  .",
+			".^^^^^^.    .........                  .",
+			"........            .                  .",
+			".                   ...........        .",
+			".                                      .",
+			".                                   .. .",
+			".                                      .",
+			".                          .....       .",
+			".                                      .",
+			".                       S              .",
+			"........................................"
+		}   
 	};
 	
 	public Game(String title, int width2, int height2){
@@ -60,9 +71,7 @@ public class Game implements Runnable{
 		this.title = title;
 		keyManager = new KeyManager();
 		menu = new Menu(this);
-		slime = new Slime(this, menu, 150, 100);
-	    player = new Player(this, menu, 100, 100, slime);
-
+		player = new Player(this, 32, 690);
 
 	}
 	private void init(){
@@ -76,10 +85,22 @@ public class Game implements Runnable{
 					String blockType = Character.toString(levels[i][t].charAt(j));
 					switch(blockType) {
 						case ".":
-							blocks.get(i).add(new Block(j*30, t*30, 30, 30, "normal"));
+							blocks.get(i).add(new Block(j*32, t*30, 32, 30, "normal"));
 							break;
 						case "^":
-							blocks.get(i).add(new Block(j*30, t*30, 30, 30, "spike"));
+							blocks.get(i).add(new Block(j*32, t*30, 32, 30, "spike"));
+					}
+				}
+			}
+		}
+		for (int i = 0 ; i < levels.length ; i++) {
+			enemies.add(new ArrayList<Enemy>());
+			for (int t = 0 ; t < levels[i].length ; t++) {
+				for (int j = 0 ; j < levels[i][t].length() ; j++) {
+					String blockType = Character.toString(levels[i][t].charAt(j));
+					switch(blockType) {
+						case "S":
+							enemies.get(i).add(new Enemy(j*32, t*30, "slime", this));
 					}
 				}
 			}
@@ -123,11 +144,14 @@ public class Game implements Runnable{
 		 g.setColor(BlueGreen);
 		 g.fillRect(0, 0, 1280, 720);
 		 
-		 slime.render(g);
+		 
 		 player.render(g);
 		 
 		 for (int i = 0 ; i < blocks.get(level).size() ; i++) {
 			 blocks.get(level).get(i).render(g);
+		 }
+		 for (int i = 0 ; i < enemies.get(level).size() ; i++) {
+			 enemies.get(level).get(i).render(g);
 		 }
 		 
 		 buffer.show();
@@ -138,7 +162,9 @@ public class Game implements Runnable{
 		keyManager.tick();
 		menu.tick();
 		player.tick();
-		slime.tick();
+		 for (int i = 0 ; i < enemies.get(level).size() ; i++) {
+			 enemies.get(level).get(i).tick();
+		 }
 	}
 	
 	public KeyManager getKeyManager(){

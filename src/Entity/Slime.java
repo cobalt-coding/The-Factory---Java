@@ -22,19 +22,20 @@ public class Slime extends Entity{
 
 	private boolean falling = true;
 	
-	public Slime(Game game,Menu menu,float x, float y) {
+	public Slime(Game game,float x, float y) {
 		super(x, y);
-		this.menu = menu;
 		this.game = game;
 	}
 
 	@Override
 	public void tick() {
-		if(menu.active)
+		if(game.menu.active)
 			return;
 		if(health <= 0)
 			return;
-		velx += .4 * direction;
+		if(!falling){
+			velx += .4 * direction;
+		}
 		x+=this.velx;
 		this.collisionCheck(velx, 0);
 		y+=this.vely;

@@ -1,5 +1,6 @@
 package Entity;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import Factory.Game;
@@ -19,6 +20,8 @@ public class Bird extends Entity{
 	private float vely = 0;
 	private int width = 40;
 	private int height = 30;
+	private boolean alt = false;
+	private Color base = new Color(96, 96, 93);
 
 	
 	public Bird(Game game,float x, float y) {
@@ -39,17 +42,19 @@ public class Bird extends Entity{
 		this.collisionCheck(0, vely);
 		
 		this.velx/=1.2;
+		alt = !alt;
 	}
 
 	@Override
 	public void render(Graphics g) {
 		if(health <= 0)
 			return;
-		if(direction == 1){
-		g.drawImage(Assets.bird, (int) x-5, (int) y-5, null);
-		}
-		if(direction == -1){
-		g.drawImage(Assets.birdR, (int) x-5, (int) y-5, null);
+		g.setColor(base);
+		g.fillRect((int) x + 20, (int)y+17, 10, 15);
+		if (!alt){
+		g.drawImage(Assets.drone, (int) x-5, (int) y-5, null);
+		}else{
+			g.drawImage(Assets.droneAlt, (int) x-5, (int) y-5, null);
 		}
 	}
 	

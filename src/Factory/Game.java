@@ -44,16 +44,16 @@ public class Game implements Runnable{
 			".                                           .",
 			".                                           .",
 			".                                           .",
-			".      B                                    .",
+			".      D                                    .",
 			".                                           .",
 			".                                           .",
 			".                                           .",
 			".                                           .",
-			".                   >>>>>>>                 .",
 			".                                           .",
-			".  .                            <<<<<<<<    .",
 			".                                           .",
-			".      .    .   S   .                       .",
+			".                                           .",
+			".                                           .",
+			".>>  <<.    .   S   .                       .",
 			".^^^^^^.    .........                       .",
 			"........            .                       .",
 			".                   ...........            l.",
@@ -116,8 +116,8 @@ public class Game implements Runnable{
 						case "S":
 							enemies.get(i).add(new Enemy(j*32, t*30, "slime", this));
 							break;
-						case "B":
-							enemies.get(i).add(new Enemy(j*32, t*30, "bird", this));
+						case "D":
+							enemies.get(i).add(new Enemy(j*32, t*30, "drone", this));
 					}
 				}
 			}

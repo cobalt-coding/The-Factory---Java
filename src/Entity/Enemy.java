@@ -25,7 +25,7 @@ public Enemy(float x, float y, String type, Game game) {
 		width = 40;
 		height = 30;
 		break;
-	case "bird":
+	case "drone":
 		bird = new Bird(game, x, y);
 	}
 }
@@ -38,7 +38,7 @@ public void tick() {
 	 x = slime.x;
 	 y = slime.y;
 		break;
-	case "bird":
+	case "drone":
 	 bird.tick();
 	 x = bird.x;
 	 y = bird.y;
@@ -51,7 +51,7 @@ public void render(Graphics g) {
 		case "slime":
 			slime.render(g);
 			break;
-		case "bird":
+		case "drone":
 			bird.render(g);
 	}
 }

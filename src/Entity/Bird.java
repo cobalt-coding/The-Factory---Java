@@ -2,6 +2,8 @@ package Entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 import Factory.Game;
 import Graphics.Assets;
@@ -22,6 +24,8 @@ public class Bird extends Entity{
 	private int height = 30;
 	private boolean alt = false;
 	private Color base = new Color(96, 96, 93);
+	private float playX, playY, yDiff, xDiff;
+	private double angle;
 
 	
 	public Bird(Game game,float x, float y) {
@@ -43,6 +47,12 @@ public class Bird extends Entity{
 		
 		this.velx/=1.2;
 		alt = !alt;
+		
+		playX = game.getPlayer().getX();
+		playY = game.getPlayer().getY();
+		xDiff = x + 20 - playX;
+		yDiff = y + 17 - playY;
+		angle = Math.atan(xDiff/yDiff);	
 	}
 
 	@Override
@@ -50,12 +60,16 @@ public class Bird extends Entity{
 		if(health <= 0)
 			return;
 		g.setColor(base);
-		g.fillRect((int) x + 20, (int)y+17, 10, 15);
 		if (!alt){
 		g.drawImage(Assets.drone, (int) x-5, (int) y-5, null);
 		}else{
 			g.drawImage(Assets.droneAlt, (int) x-5, (int) y-5, null);
 		}
+		Graphics2D g2d = (Graphics2D)g;
+		AffineTransform droneGun = g2d.getTransform();
+		g2d.rotate(angle*-1, x+25, y+22.5);
+		g.fillRect((int) x + 20, (int)y+17, 10, 15);
+		g2d.setTransform(droneGun);
 	}
 	
 	public void collisionCheck(float velX, float velY) {

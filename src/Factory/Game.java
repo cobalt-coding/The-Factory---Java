@@ -209,6 +209,9 @@ public class Game implements Runnable{
 	public KeyManager getKeyManager(){
 		return keyManager;
 	}
+	public Player getPlayer(){
+		return player;
+	}
 	
 	public synchronized void start(){
 		if(running)

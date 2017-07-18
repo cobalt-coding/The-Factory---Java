@@ -11,8 +11,7 @@ public class Assets {
 	
 	//Add images to the "res" folder and initiate a variable on the line below as a BufferedImage
 	
-	//public static BufferedImage
-	public static BufferedImage icon, spike, ladder, lCon, rCon, drone, droneAlt;
+	public static BufferedImage icon, spike, ladder, lCon, rCon, drone, droneAlt, bullet;
 	
 	public static void init(){
 		
@@ -24,5 +23,6 @@ public class Assets {
 		 rCon = ImageLoader.loadImage("/textures/RCon.png");
 		 drone = ImageLoader.loadImage("/textures/Drone.png"); 
 		 droneAlt = ImageLoader.loadImage("/textures/DroneAlt.png");
+		 bullet = ImageLoader.loadImage("/textures/Bullet.png");
 	}
 }

@@ -9,6 +9,7 @@ import Factory.Game;
 import Graphics.Assets;
 import Menu.Menu;
 import Misc.Functions;
+import Entity.Bullet;
 
 public class Bird extends Entity{
 
@@ -26,6 +27,9 @@ public class Bird extends Entity{
 	private Color base = new Color(96, 96, 93);
 	private float playX, playY, yDiff, xDiff;
 	private double angle;
+	private int timesCalled;
+	private Bullet bullet;
+	private boolean bullMade;
 
 	
 	public Bird(Game game,float x, float y) {
@@ -35,6 +39,12 @@ public class Bird extends Entity{
 
 	@Override
 	public void tick() {
+		timesCalled++;
+		if(timesCalled == 100){
+			timesCalled = 0;
+			bullet = new Bullet(this.x + 22, this.y + 19, xDiff, yDiff, angle, game);
+			bullMade = true;
+		}
 		if(game.menu.active)
 			return;
 		if(health <= 0)
@@ -52,7 +62,10 @@ public class Bird extends Entity{
 		playY = game.getPlayer().getY();
 		xDiff = x + 20 - playX;
 		yDiff = y + 17 - playY;
-		angle = Math.atan(xDiff/yDiff);	
+		angle = Math.atan(xDiff/yDiff);
+		if(bullMade){
+			bullet.tick();
+		}
 	}
 
 	@Override
@@ -70,22 +83,15 @@ public class Bird extends Entity{
 		g2d.rotate(angle*-1, x+25, y+22.5);
 		g.fillRect((int) x + 20, (int)y+17, 10, 15);
 		g2d.setTransform(droneGun);
+		if(bullMade){
+			bullet.render(g);
+		}
 	}
 	
 	public void collisionCheck(float velX, float velY) {
 		for (int i = 0 ; i < game.blocks.get(game.level).size() ; i++) {
 			 Block block = game.blocks.get(game.level).get(i);
-			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height) && block.type == "normal") {
-				 if (velX > 0) {
-					 direction *= -1;
-					 x = block.getX()-width;
-				 }
-				 if (velX < 0) {
-					 direction *= -1;
-					 x = block.getX()+block.getWidth();
-				 }
-			 }
-			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height) && block.type == "spike") {
+			 if (functions.collide(block.getX(), block.getY(), block.getWidth(), block.getHeight(), x, y, width, height)) {
 				 if (velX > 0) {
 					 direction *= -1;
 					 x = block.getX()-width;

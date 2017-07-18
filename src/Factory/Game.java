@@ -28,7 +28,7 @@ public class Game implements Runnable{
 	Color BlueGreen = new Color(72, 135, 113);
 	
 	private KeyManager keyManager;
-	private Player player;
+	public Player player;
 	public Menu menu;
 	
 	public int level = 0;
